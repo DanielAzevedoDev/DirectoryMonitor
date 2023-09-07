@@ -49,10 +49,19 @@ class Handler(FileSystemEventHandler):
             print(event.event_type)
 
 def check_deployed(event):
+    end = False
     if(event.dest_path.find(".deployed") != -1):
         print("finished deploying")
-        playsound("bell.mp3")
+        playsound("zelda.mp3")
+        end = True
+    elif(event.dest_path.find(".failed") != -1):    
+        print("failed deploying")
+        playsound("fail.mp3")
+        end = True
+    
+    if(end):
         print("Deployed FInished.\n\nClosing...")
+        input("Click ENTER to close")
         exit()
 
 if __name__ == '__main__':
